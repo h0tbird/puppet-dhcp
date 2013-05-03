@@ -1,24 +1,24 @@
 #------------------------------------------------------------------------------
-# There must be an interface in this network.
+# There must be an interface in this network:
 #------------------------------------------------------------------------------
 
-subnet <%= name %> netmask <%= netmask %>
+subnet <%= @name %> netmask <%= @netmask %>
 
 {
-<% if domain_name != :undef -%>    option domain-name            "<%= domain_name %>";
+<% if @domain_name -%>    option domain-name            "<%= @domain_name %>";
 <% end -%>
-<% if domain_name_servers != :undef -%>    option domain-name-servers    <%= domain_name_servers %>;
+<% if @domain_name_servers -%>    option domain-name-servers    <%= @domain_name_servers %>;
 <% end -%>
-<% if routers != :undef -%>    option routers                <%= routers %>;
+<% if @routers -%>    option routers                <%= @routers %>;
 <% end -%>
-<% if subnet_mask != :undef -%>    option subnet-mask            <%= subnet_mask %>;
+<% if @subnet_mask -%>    option subnet-mask            <%= @subnet_mask %>;
 <% end -%>
-<% if ntp_servers != :undef -%>    option ntp-servers            <%= ntp_servers %>;
+<% if @ntp_servers -%>    option ntp-servers            <%= @ntp_servers %>;
 <% end -%>
-<% if default_lease_time != :undef -%>    default-lease-time            <%= default_lease_time %>;
+<% if @default_lease_time -%>    default-lease-time            <%= @default_lease_time %>;
 <% end -%>
-<% if max_lease_time != :undef -%>    max-lease-time                <%= max_lease_time %>;
+<% if @max_lease_time -%>    max-lease-time                <%= @max_lease_time %>;
 <% end -%>
-<% if range_dynamic_bootp != :undef -%>    range dynamic-bootp           <%= range_dynamic_bootp %>;
+<% if @range_dynamic_bootp -%>    range dynamic-bootp           <%= @range_dynamic_bootp %>;
 <% end -%>
 }

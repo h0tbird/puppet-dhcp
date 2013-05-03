@@ -11,7 +11,7 @@
 #
 # Parameters:
 #
-#   
+#
 #
 # Actions:
 #
@@ -21,7 +21,7 @@
 #
 #   dhcp::subnet { '192.168.1.0':
 #       netmask             => '255.255.255.0',
-#       domain_name         => 'popapp.lan',
+#       domain_name         => 'demo.lan',
 #       domain_name_servers => '8.8.8.8, 8.8.4.4',
 #       routers             => '192.168.1.1',
 #       subnet_mask         => '255.255.255.0',
@@ -34,8 +34,8 @@
 #------------------------------------------------------------------------------
 define dhcp::subnet (
 
-    $netmask,
     $ensure              = present,
+    $netmask             = undef,
     $domain_name         = undef,
     $domain_name_servers = undef,
     $routers             = undef,
@@ -43,15 +43,12 @@ define dhcp::subnet (
     $ntp_servers         = undef,
     $default_lease_time  = undef,
     $max_lease_time      = undef,
-    $range_dynamic_bootp = undef
+    $range_dynamic_bootp = undef,
 
 ) {
 
     # Validate parameters:
     validate_re($ensure, '^present$|^absent$')
-
-    # Include delegated class:
-    include dhcp
 
     # Collect variables:
     $templates = getvar("${module_name}::params::templates")

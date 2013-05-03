@@ -37,7 +37,9 @@
 class dhcp (
 
     $ensure  = running,
-    $version = present
+    $version = present,
+    $globals = undef,
+    $subnets = undef,
 
 ) {
 
@@ -51,8 +53,8 @@ class dhcp (
     # Set the requirements:
     anchor { "${module_name}::begin":   } ->
     class  { "${module_name}::params":  } ->
-    class  { "${module_name}::install": ensure => $version } ->
+    class  { "${module_name}::install": } ->
     class  { "${module_name}::config":  } ~>
-    class  { "${module_name}::service": ensure => $ensure } ->
+    class  { "${module_name}::service": } ->
     anchor { "${module_name}::end":     }
 }

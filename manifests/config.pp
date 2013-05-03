@@ -14,6 +14,8 @@ class dhcp::config {
     # Collect variables:
     $templates = getvar("${module_name}::params::templates")
     $configs   = getvar("${module_name}::params::configs")
+    $globals   = getvar("${module_name}::globals")
+    $subnets   = getvar("${module_name}::subnets")
 
     # Define the target file:
     concat { $configs[0]: ensure => present }
@@ -24,5 +26,10 @@ class dhcp::config {
         target  => $configs[0],
         content => template("${templates}/dhcpd.conf_header.erb"),
         order   => '00',
+    }
+
+    # Subnet declarations:
+    if $subnets {
+        create_resources(dhcp::subnet, $subnets)
     }
 }
